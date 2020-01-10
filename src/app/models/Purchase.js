@@ -1,27 +1,20 @@
 const mongoose = require('mongoose')
 const mongoosePaginate = require('mongoose-paginate')
 
-const Ad = new mongoose.Schema({
-  title: {
+const Purchase = new mongoose.Schema({
+  ad: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'Ad',
+  },
+  content: {
     type: String,
     required: true,
   },
-  description: {
-    type: String,
-    required: true,
-  },
-  author: {
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
-  },
-  price: {
-    type: Number,
-    required: true,
-  },
-  purchasedBy: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
   },
   createdAt: {
     type: Date,
@@ -29,6 +22,6 @@ const Ad = new mongoose.Schema({
   },
 })
 
-Ad.plugin(mongoosePaginate)
+Purchase.plugin(mongoosePaginate)
 
-module.exports = mongoose.model('Ad', Ad)
+module.exports = mongoose.model('Purchase', Purchase)
